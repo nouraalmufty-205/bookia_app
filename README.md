@@ -1,16 +1,10 @@
-# bookia
+Splash Screen
 
-A new Flutter project.
+<img width="355" height="792" alt="image" src="https://github.com/user-attachments/assets/8f489e12-25f4-4c04-8633-cf48413a9ed2" />
 
-## Getting Started
+Welcome Screen in English and Arabic
 
-This project is a starting point for a Flutter application.
+<img width="352" height="789" alt="image" src="https://github.com/user-attachments/assets/db138c4c-fb2e-4f04-9215-c0a611dcd321" />
+<img width="354" height="785" alt="image" src="https://github.com/user-attachments/assets/4daabe84-68bf-4f4c-ba7d-2871d08cb94a" />
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
