@@ -1,3 +1,5 @@
 {
-    "Login":"Login"
+    "order_your_book_now": "Order Your Book Now!",
+  "login": "Login",
+  "register": "Register"
 }
