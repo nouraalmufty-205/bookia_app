@@ -8,7 +8,7 @@ class AuthRepo {
   }) async {
     try {
       final response = await dio.post(
-        "http://localhost:8000/api/login",
+        "https://codingarabic.online/api/login",
         data: {"email": email, "password": password},
       );
       if (response.statusCode == 200) {
@@ -28,7 +28,7 @@ class AuthRepo {
   }) async {
     try {
       final response = await dio.post(
-        "http://localhost:8000/api/register",
+        "https://codingarabic.online/api/register",
         data: {
           "name": username,
           "email": email,
