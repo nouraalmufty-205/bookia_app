@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{local}}/resend-verify-code"
+method: GET
+headers:
+  Accept: application/json
+  Content-Type: application/json
+auth:
+  type: bearer
+  credentials:
+    token: "{{vault:authorization-secret}}"
+settings: {}
+examples: ./.resources/Resend Verify Link.resources/examples
+order: 7000

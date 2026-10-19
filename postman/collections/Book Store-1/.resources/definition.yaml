@@ -1,0 +1,20 @@
+$kind: collection
+name: Book Store
+description: ""
+variables:
+  - key: url
+    value: https://codingarabic.online/api
+    disabled: false
+    secret: false
+  - key: token
+    value: 7426|AaGVDzym2cMY5M8PKoUUlKGdrDoqSjjmjmGTMZe8
+    disabled: false
+    secret: false
+  - key: auth_secret_0i7m
+    secret: true
+auth:
+  - id: 718df817-c515-45ef-9686-318faecb71ac
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{vault:authorization-secret}}"

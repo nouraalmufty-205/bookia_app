@@ -1,0 +1,7 @@
+workspace:
+  id: 9adce949-5a04-4354-8601-f155cdf1aa07
+cloudResources:
+  collections:
+    ../postman/collections/Book Store: 58902464-d38f7b49-7b3e-4de3-ab84-1cc261d5d82c
+    ../postman/collections/Book Store-1: 58902464-7419cd83-a8f2-4ed4-a33c-5f561f6ff79c
+    ../postman/collections/My Collection: 58902464-80c16090-d81c-43a4-8a4a-48d10f9d8359

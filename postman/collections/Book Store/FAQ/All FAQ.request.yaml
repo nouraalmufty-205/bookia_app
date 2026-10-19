@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{local}}/faqs"
+method: GET
+settings: {}
+examples: ./.resources/All FAQ.resources/examples
+order: 1000

@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{local}}/products"
+method: GET
+headers:
+  Accept: application/json
+  Content-Type: application/json
+settings: {}
+examples: ./.resources/All Products.resources/examples
+order: 1000

@@ -1,0 +1,17 @@
+$kind: collection
+description: ""
+variables:
+  - key: url
+    value: https://codingarabic.online/api
+    secret: false
+  - key: token
+    value: 7426|AaGVDzym2cMY5M8PKoUUlKGdrDoqSjjmjmGTMZe8
+    secret: false
+  - key: auth_secret_0i7m
+    secret: true
+auth:
+  - id: 9552323e-6962-4c7c-95bd-11e5424d1b1a
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{vault:authorization-secret}}"

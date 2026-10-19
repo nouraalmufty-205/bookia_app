@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{local}}/settings"
+method: GET
+headers:
+  Accept: application/json
+  Content-Type: application/json
+settings: {}
+examples: ./.resources/Get Settings.resources/examples
+order: 1000

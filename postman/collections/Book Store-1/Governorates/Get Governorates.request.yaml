@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{local}}/governorates"
+method: GET
+settings: {}
+examples: ./.resources/Get Governorates.resources/examples
+order: 1000
