@@ -9,7 +9,7 @@ Welcome Screen in English and Arabic
 
 Login Screen
 
-<img width="353" height="783" alt="image" src="https://github.com/user-attachments/assets/16179010-5426-4137-9d32-82ba6ef48e5f" />
+<img width="353" height="785" alt="image" src="https://github.com/user-attachments/assets/af77102e-5f8a-4f02-8f51-c7323ed5462d" />
 
 Register Screen
 
