@@ -38,6 +38,7 @@ dependencies:
   easy_localization: ^3.0.8
   flutter_bloc: ^9.1.1
   flutter_native_splash: ^2.4.7
+  dio: ^5.11.1
 
 dev_dependencies:
   flutter_test:

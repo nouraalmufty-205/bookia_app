@@ -26,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.language),
+                  icon: Icon(Icons.language, size: 12),
                   onPressed: () {
                     if (context.locale.languageCode == 'en') {
                       context.setLocale(Locale('ar'));
@@ -43,7 +43,7 @@ class WelcomeScreen extends StatelessWidget {
             28.verticalSpace,
             Text(
               "order_your_book_now".tr(),
-              style: AppTextstyles.hintTextStyle,
+              style: AppTextstyles.font30Regular.copyWith(fontSize: 20.sp),
             ),
             Spacer(),
             AppButton(
@@ -57,6 +57,9 @@ class WelcomeScreen extends StatelessWidget {
               title: "register".tr(),
               bgColor: Colors.white,
               textColor: Colors.black,
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.RegisterScreen);
+              },
             ),
             94.verticalSpace,
           ],
