@@ -1,3 +1,5 @@
+import 'package:bookia/core/utils/app_constants.dart';
+import 'package:bookia/services/local/local_helper.dart';
 import 'package:dio/dio.dart';
 
 class AuthRepo {
@@ -12,11 +14,14 @@ class AuthRepo {
         data: {"email": email, "password": password},
       );
       if (response.statusCode == 200) {
+        String? token = response.data["data"]["token"];
+        saveToken(token);
         return true;
       } else {
         return false;
       }
     } catch (e) {
+      print(e);
       return false;
     }
   }
@@ -44,5 +49,9 @@ class AuthRepo {
     } catch (e) {
       return false;
     }
+  }
+
+  static saveToken(String? token) async {
+    await LocalHelper.prfes?.setString(AppConstants.UserToken, token ?? "");
   }
 }
