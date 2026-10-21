@@ -1,0 +1,15 @@
+id: 01a15522-1ad3-705a-8996-192aead40da7
+version: 1
+name: fakeapi
+slug: new-mock-e7c51
+enableSession: true
+protocol: http
+port: 4500
+autoRestartOnChange: true
+logging:
+  level: verbose
+  showBody: true
+scenarios:
+  - name: default
+    path: ./default.js
+    default: true
