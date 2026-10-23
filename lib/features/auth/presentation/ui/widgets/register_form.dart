@@ -17,20 +17,20 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  var formState = GlobalKey<FormState>();
+  var usernamecontroller = TextEditingController();
+  var emailcontroller = TextEditingController();
+  var passwordcontroller = TextEditingController();
+
+  void dispose() {
+    usernamecontroller.dispose();
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var formState = GlobalKey<FormState>();
-    var usernamecontroller = TextEditingController();
-    var emailcontroller = TextEditingController();
-    var passwordcontroller = TextEditingController();
-
-    void dispose() {
-      usernamecontroller.dispose();
-      emailcontroller.dispose();
-      passwordcontroller.dispose();
-      super.dispose();
-    }
-
     return BlocListener<AuthCubit, AuthCubitState>(
       listener: (context, state) {
         if (state is RegisterLoadingStatus) {
