@@ -16,6 +16,7 @@ class AuthRepo {
       if (response.statusCode == 200) {
         String? token = response.data["data"]["token"];
         saveToken(token);
+
         return true;
       } else {
         return false;
@@ -42,6 +43,8 @@ class AuthRepo {
         },
       );
       if (response.statusCode == 200) {
+        String? token = response.data["data"]["token"];
+        saveToken(token);
         return true;
       } else {
         return false;
