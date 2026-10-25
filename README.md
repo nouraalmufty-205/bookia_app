@@ -17,7 +17,8 @@ Register Screen
 
 Home Screen
 
-<img width="356" height="790" alt="image" src="https://github.com/user-attachments/assets/2068ca5e-6782-49e7-8445-9da50e9f9948" />
+<img width="353" height="785" alt="image" src="https://github.com/user-attachments/assets/c8a3a126-1eaa-4831-b985-e76f84b8d13e" />
+
 
 
 
