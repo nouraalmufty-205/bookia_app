@@ -46,7 +46,8 @@ class _LoginFormState extends State<LoginForm> {
           Navigator.pop(context);
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(content: Text("Error ")),
+            builder: (context) =>
+                Center(child: AlertDialog(content: Text("Error "))),
           );
         }
       },
