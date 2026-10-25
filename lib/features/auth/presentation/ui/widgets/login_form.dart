@@ -40,6 +40,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
           );
         } else if (state is LoginSuccessState) {
+          Navigator.pop(context);
           Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen);
         } else if (state is LoginErrorState) {
           Navigator.pop(context);
@@ -63,6 +64,7 @@ class _LoginFormState extends State<LoginForm> {
                 if (!AppValidator.isValidEmail(v ?? "")) {
                   return "Email invalid";
                 }
+                return null;
               },
             ),
             16.verticalSpace,
@@ -85,7 +87,7 @@ class _LoginFormState extends State<LoginForm> {
               onTap: () {
                 if (formState.currentState?.validate() ?? false) {
                   context.read<AuthCubit>().login(
-                    email: emailcontroller.text,
+                    email: emailcontroller.text.trim(),
                     password: passwordcontroller.text,
                   );
                 }
