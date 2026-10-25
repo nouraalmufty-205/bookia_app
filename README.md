@@ -15,4 +15,9 @@ Register Screen
 
 <img width="354" height="787" alt="image" src="https://github.com/user-attachments/assets/bcca2525-d3af-4b83-a29b-a4a42d160202" />
 
+Home Screen
+
+<img width="356" height="790" alt="image" src="https://github.com/user-attachments/assets/2068ca5e-6782-49e7-8445-9da50e9f9948" />
+
+
 
