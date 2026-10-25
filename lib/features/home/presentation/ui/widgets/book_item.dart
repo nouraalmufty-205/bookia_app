@@ -1,10 +1,12 @@
 import 'package:bookia/core/theme/app_textstyles.dart';
 import 'package:bookia/core/theme/appcolors.dart';
+import 'package:bookia/features/home/data/models/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BookItem extends StatelessWidget {
-  const BookItem({super.key});
+  final Products? product;
+  const BookItem({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class BookItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12.r),
             child: Image.network(
-              "https://upload.wikimedia.org/wikipedia/commons/d/de/Nature_HD_pictures.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+              product?.image ?? "",
               width: 140.89.w,
               height: 175.37.h,
               fit: BoxFit.cover,
@@ -30,13 +32,18 @@ class BookItem extends StatelessWidget {
           ),
           10.verticalSpace,
           Text(
-            "Book Title",
+            product?.name ?? "",
             style: AppTextstyles.font16Regular.copyWith(fontSize: 18.sp),
           ),
           4.verticalSpace,
           Row(
             children: [
-              Expanded(child: Text("122", style: AppTextstyles.font16Regular)),
+              Expanded(
+                child: Text(
+                  product?.price ?? "",
+                  style: AppTextstyles.font16Regular,
+                ),
+              ),
               30.horizontalSpace,
               IconButton(
                 onPressed: () {},
