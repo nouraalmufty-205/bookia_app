@@ -33,6 +33,8 @@ class BookItem extends StatelessWidget {
           10.verticalSpace,
           Text(
             product?.name ?? "",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: AppTextstyles.font16Regular.copyWith(fontSize: 18.sp),
           ),
           4.verticalSpace,

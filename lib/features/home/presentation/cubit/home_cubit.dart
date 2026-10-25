@@ -13,7 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
     if (response is BooksModel) {
       emit(GetBestSellerSuccess(response.data?.products));
     } else {
-      emit(GetBestSellerLoading());
+      emit(GetBestSellerError());
     }
   }
 }
