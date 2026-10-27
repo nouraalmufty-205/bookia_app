@@ -8,12 +8,14 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final bool? autofocus;
   const CustomTextField({
     super.key,
     required this.hintText,
     this.isPassword = false,
     this.validator,
     this.controller,
+    this.autofocus,
   });
 
   @override
@@ -22,9 +24,11 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool isObscure = true;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: widget.autofocus ?? false,
       controller: widget.controller,
       validator: widget.validator,
       obscureText: widget.isPassword && isObscure,
