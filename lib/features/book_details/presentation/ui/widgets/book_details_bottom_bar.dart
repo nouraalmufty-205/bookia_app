@@ -4,15 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BookDetailsBottomBar extends StatefulWidget {
-  final double unitPrice;
-  final double? originalPrice;
+  final double price;
   final int maxStock;
   final VoidCallback onAddToCart;
 
   const BookDetailsBottomBar({
     super.key,
-    required this.unitPrice,
-    this.originalPrice,
+    required this.price,
     required this.maxStock,
     required this.onAddToCart,
   });
@@ -24,7 +22,7 @@ class BookDetailsBottomBar extends StatefulWidget {
 class _BookDetailsBottomBarState extends State<BookDetailsBottomBar> {
   int quantity = 1;
 
-  double get totalPrice => widget.unitPrice * quantity;
+  double get totalPrice => widget.price * quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -94,42 +92,23 @@ class _BookDetailsBottomBarState extends State<BookDetailsBottomBar> {
                     ],
                   ),
                 ),
-                // Total Price
+                // Price Display (No offer / strikethrough)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "Total Price",
+                      "Price",
                       style: AppTextstyles.hintTextStyle.copyWith(
                         fontSize: 12.sp,
                       ),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          "\$${totalPrice.toStringAsFixed(2)}",
-                          style: AppTextstyles.font30Regular.copyWith(
-                            fontSize: 22.sp,
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.mainColor,
-                          ),
-                        ),
-                        if (widget.originalPrice != null &&
-                            widget.originalPrice! > widget.unitPrice) ...[
-                          6.horizontalSpace,
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 2.h),
-                            child: Text(
-                              "\$${(widget.originalPrice! * quantity).toStringAsFixed(2)}",
-                              style: AppTextstyles.hintTextStyle.copyWith(
-                                fontSize: 13.sp,
-                                decoration: TextDecoration.lineThrough,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
+                    Text(
+                      "\$${totalPrice.toStringAsFixed(2)}",
+                      style: AppTextstyles.font30Regular.copyWith(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.mainColor,
+                      ),
                     ),
                   ],
                 ),

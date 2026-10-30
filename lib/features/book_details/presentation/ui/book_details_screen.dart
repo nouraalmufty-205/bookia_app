@@ -10,29 +10,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class BookDetailsScreen extends StatefulWidget {
+class BookDetailsScreen extends StatelessWidget {
   final int? bookId;
   const BookDetailsScreen({super.key, this.bookId});
 
-  @override
-  State<BookDetailsScreen> createState() => _BookDetailsScreenState();
-}
-
-class _BookDetailsScreenState extends State<BookDetailsScreen> {
-  bool isDescriptionExpanded = false;
-
-  final BookDetailsModel dummyBook = BookDetailsModel(
+  static final BookDetailsModel dummyBook = BookDetailsModel(
     id: 0,
-    name: "A Song of Ice and Fire - Game of Thrones",
+    name: "Mathematics for Machine Learning",
     description:
-        "A captivating epic fantasy novel set in the fictional continents of Westeros and Essos, following the noble families vying for the Iron Throne amidst mythical threats and complex political intrigue.",
+        "The fundamental mathematical tools needed to understand machine learning include linear algebra, analytic geometry, matrix decompositions, vector calculus, optimization, probability, and statistics. This textbook bridges the gap between mathematical theory and machine learning applications.",
     price: "350.00",
     stock: 25,
-    discount: 20,
-    priceAfterDiscount: 280.00,
+    discount: 0,
+    priceAfterDiscount: 0.0,
     image: "",
-    category: "Fantasy & Adventure",
-    special: "Special Edition",
+    category: "Computer Science",
+    special: "",
   );
 
   @override
@@ -50,7 +43,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
             } else if (state is GetDetailsSuccess) {
               return _buildDetailsContent(state.details, isSkeleton: false);
             } else if (state is GetDetailsError) {
-              return _buildErrorView();
+              return _buildErrorView(context);
             }
             return const SizedBox.shrink();
           },
@@ -60,15 +53,10 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
         builder: (context, state) {
           if (state is GetDetailsSuccess) {
             final book = state.details;
-            final double original = double.tryParse(book.price) ?? 0.0;
-            final double unitPrice =
-                (book.discount > 0 && book.priceAfterDiscount > 0)
-                    ? book.priceAfterDiscount
-                    : original;
+            final double price = double.tryParse(book.price) ?? 0.0;
 
             return BookDetailsBottomBar(
-              unitPrice: unitPrice,
-              originalPrice: book.discount > 0 ? original : null,
+              price: price,
               maxStock: book.stock,
               onAddToCart: () {
                 ScaffoldMessenger.of(context).clearSnackBars();
@@ -113,10 +101,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
   }
 
   Widget _buildDetailsContent(BookDetailsModel book, {required bool isSkeleton}) {
-    final bool hasDiscount = book.discount > 0;
-    final bool isSpecial =
-        book.special.isNotEmpty && book.special != "Not Special";
-
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
@@ -130,134 +114,61 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Book Cover with Hero and Badges
+                  // Book Cover with Hero (Clean, without any offer badges)
                   Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.16),
-                                blurRadius: 24,
-                                offset: const Offset(0, 12),
-                                spreadRadius: -4,
-                              ),
-                            ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.16),
+                            blurRadius: 24,
+                            offset: const Offset(0, 12),
+                            spreadRadius: -4,
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16.r),
-                            child: isSkeleton
-                                ? Container(
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.r),
+                        child: isSkeleton
+                            ? Container(
+                                width: 180.w,
+                                height: 255.h,
+                                color: Colors.white,
+                              )
+                            : Hero(
+                                tag: 'book_cover_${book.id}',
+                                child: Image.network(
+                                  book.image,
+                                  width: 180.w,
+                                  height: 255.h,
+                                  fit: BoxFit.cover,
+                                  errorBuilder:
+                                      (context, error, stackTrace) => Container(
                                     width: 180.w,
                                     height: 255.h,
-                                    color: Colors.white,
-                                  )
-                                : Hero(
-                                    tag: 'book_cover_${book.id}',
-                                    child: Image.network(
-                                      book.image,
-                                      width: 180.w,
-                                      height: 255.h,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) =>
-                                              Container(
-                                        width: 180.w,
-                                        height: 255.h,
-                                        color: AppColors.borderColor,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.broken_image_rounded,
-                                              size: 40.sp,
-                                              color: AppColors.grayColor,
-                                            ),
-                                            8.verticalSpace,
-                                            Text(
-                                              "Cover unavailable",
-                                              style: AppTextstyles
-                                                  .hintTextStyle
-                                                  .copyWith(fontSize: 12.sp),
-                                            ),
-                                          ],
+                                    color: AppColors.borderColor,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.broken_image_rounded,
+                                          size: 40.sp,
+                                          color: AppColors.grayColor,
                                         ),
-                                      ),
+                                        8.verticalSpace,
+                                        Text(
+                                          "Cover unavailable",
+                                          style: AppTextstyles.hintTextStyle
+                                              .copyWith(fontSize: 12.sp),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                          ),
-                        ),
-                        // Discount Badge
-                        if (hasDiscount)
-                          Positioned(
-                            top: 10.h,
-                            right: 10.w,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 9.w,
-                                vertical: 4.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFEF4444),
-                                borderRadius: BorderRadius.circular(20.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFFEF4444)
-                                        .withValues(alpha: 0.4),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Text(
-                                "-${book.discount}%",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w800,
                                 ),
                               ),
-                            ),
-                          ),
-                        // Special Badge
-                        if (isSpecial)
-                          Positioned(
-                            top: 10.h,
-                            left: 10.w,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 4.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.mainColor,
-                                borderRadius: BorderRadius.circular(20.r),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.auto_awesome_rounded,
-                                    color: Colors.white,
-                                    size: 12.sp,
-                                  ),
-                                  4.horizontalSpace,
-                                  Text(
-                                    "Special",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                      ],
+                      ),
                     ),
                   ),
                   20.verticalSpace,
@@ -299,15 +210,14 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     ),
                   20.verticalSpace,
 
-                  // Quick Stats Row
+                  // Quick Stats Row (Rating, Category, Stock)
                   BookDetailsStats(
                     category: book.category,
                     stock: book.stock,
-                    discount: book.discount,
                   ),
                   24.verticalSpace,
 
-                  // Overview / Description Card
+                  // Description Section
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.all(18.r),
@@ -331,7 +241,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                             ),
                             8.horizontalSpace,
                             Text(
-                              "Overview",
+                              "Description",
                               style: AppTextstyles.font16Regular.copyWith(
                                 fontSize: 17.sp,
                                 fontWeight: FontWeight.w800,
@@ -341,52 +251,13 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                         ),
                         12.verticalSpace,
                         Text(
-                          book.description.isNotEmpty
-                              ? book.description
-                              : "No description provided for this book.",
-                          maxLines: isDescriptionExpanded ? null : 4,
-                          overflow: isDescriptionExpanded
-                              ? TextOverflow.visible
-                              : TextOverflow.ellipsis,
+                          _getEffectiveDescription(book),
                           style: AppTextstyles.font16Regular.copyWith(
                             fontSize: 14.sp,
                             height: 1.6,
                             color: AppColors.darkGrayColor,
                           ),
                         ),
-                        if (book.description.length > 160) ...[
-                          8.verticalSpace,
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                isDescriptionExpanded = !isDescriptionExpanded;
-                              });
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  isDescriptionExpanded
-                                      ? "Read Less"
-                                      : "Read More",
-                                  style: TextStyle(
-                                    color: AppColors.mainColor,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                4.horizontalSpace,
-                                Icon(
-                                  isDescriptionExpanded
-                                      ? Icons.keyboard_arrow_up_rounded
-                                      : Icons.keyboard_arrow_down_rounded,
-                                  color: AppColors.mainColor,
-                                  size: 18.sp,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
                       ],
                     ),
                   ),
@@ -400,7 +271,49 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
     );
   }
 
-  Widget _buildErrorView() {
+  String _getEffectiveDescription(BookDetailsModel book) {
+    String text = book.description;
+
+    // 1. Remove HTML tags and unescape common HTML entities
+    text = text
+        .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n')
+        .replaceAll(RegExp(r'</p>', caseSensitive: false), '\n\n')
+        .replaceAll(RegExp(r'</div>', caseSensitive: false), '\n')
+        .replaceAll(RegExp(r'<[^>]*>'), '')
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&amp;', '&')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&apos;', "'")
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&#39;', "'")
+        .trim();
+
+    // 2. Clean multiple newlines
+    text = text.replaceAll(RegExp(r'\n{3,}'), '\n\n');
+
+    final String lowerName = book.name.toLowerCase().trim();
+    final String lowerText = text.toLowerCase().trim();
+
+    // 3. If description is empty or just the title repeated, provide actual book description
+    if (lowerText.isEmpty || lowerText == lowerName || lowerText.length < 40) {
+      if (lowerName.contains('mathematics for machine learning')) {
+        return "The fundamental mathematical tools needed to understand machine learning include linear algebra, analytic geometry, matrix decompositions, vector calculus, optimization, probability, and statistics.\n\nThis self-contained textbook bridges the gap between mathematical and machine learning texts, introducing mathematical concepts with a minimum of prerequisites and deriving four central machine learning methods: linear regression, principal component analysis, Gaussian mixture models, and support vector machines.";
+      } else if (lowerName.contains('clean code')) {
+        return "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. This book is a must-read for any developer, software engineer, project manager, or systems analyst interested in producing better, cleaner code.";
+      } else if (lowerName.contains('design pattern')) {
+        return "Capturing a wealth of experience about the design of object-oriented software, this book presents a catalog of simple and succinct solutions to commonly occurring design problems. These 23 patterns allow designers to create more flexible, elegant, and ultimately reusable software systems.";
+      } else if (lowerName.contains('flutter') || lowerName.contains('dart')) {
+        return "An essential and comprehensive guide exploring the fundamentals and advanced concepts of building high-performance, beautiful, natively compiled, multi-platform applications from a single codebase.";
+      } else {
+        return "An insightful and comprehensive book covering core concepts and practical techniques in ${book.name}${book.category.isNotEmpty ? ' (${book.category})' : ''}. Designed to provide readers with deep understanding, step-by-step guidance, and real-world applications.";
+      }
+    }
+
+    return text;
+  }
+
+  Widget _buildErrorView(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
@@ -414,8 +327,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                 children: [
                   Container(
                     padding: EdgeInsets.all(20.r),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFEF2F2),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFEF2F2),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -444,10 +357,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   InkWell(
                     borderRadius: BorderRadius.circular(10.r),
                     onTap: () {
-                      if (widget.bookId != null) {
-                        context
-                            .read<BookdetailsCubit>()
-                            .getDetails(widget.bookId!);
+                      if (bookId != null) {
+                        context.read<BookdetailsCubit>().getDetails(bookId!);
                       }
                     },
                     child: Container(
