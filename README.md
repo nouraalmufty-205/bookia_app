@@ -19,6 +19,13 @@ Home Screen
 
 <img width="353" height="785" alt="image" src="https://github.com/user-attachments/assets/c8a3a126-1eaa-4831-b985-e76f84b8d13e" />
 
+Search Screen
+
+<img width="350" height="808" alt="image" src="https://github.com/user-attachments/assets/657156b9-4c56-4118-8464-f76ed1b6998d" />
+
+
+
+
 
 
 
