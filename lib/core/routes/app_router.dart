@@ -31,7 +31,12 @@ class AppRouter {
           ),
         );
       case AppRoutes.SearchScreen:
-        return MaterialPageRoute(builder: (_) => SearchScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => HomeCubit(),
+            child: SearchScreen(),
+          ),
+        );
     }
   }
 }
