@@ -6,13 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class BookDetailsStats extends StatelessWidget {
   final String category;
   final int stock;
-  final int discount;
 
   const BookDetailsStats({
     super.key,
     required this.category,
     required this.stock,
-    required this.discount,
   });
 
   @override
