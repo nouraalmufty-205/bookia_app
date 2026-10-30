@@ -23,6 +23,11 @@ Search Screen
 
 <img width="350" height="808" alt="image" src="https://github.com/user-attachments/assets/657156b9-4c56-4118-8464-f76ed1b6998d" />
 
+Details Screen
+
+<img width="355" height="795" alt="image" src="https://github.com/user-attachments/assets/553da5b3-29d0-41d2-8677-4a4e4e77691e" />
+
+
 
 
 
