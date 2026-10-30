@@ -44,9 +44,11 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => BookdetailsCubit()..getDetails(id),
-            child: BookDetailsScreen(),
+            child: BookDetailsScreen(bookId: id),
           ),
         );
+      default:
+        return null;
     }
   }
 }
