@@ -34,18 +34,34 @@ class BookItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12.r),
-              child: Image.network(
-                product?.image ?? "",
-                width: 140.89.w,
-                height: 175.37.h,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  width: 140.89.w,
-                  height: 175.37.h,
-                  color: AppColors.borderColor,
-                  child: const Icon(Icons.broken_image),
-                ),
-              ),
+              child: product?.id != null
+                  ? Hero(
+                      tag: 'book_cover_${product!.id}',
+                      child: Image.network(
+                        product?.image ?? "",
+                        width: 140.89.w,
+                        height: 175.37.h,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          width: 140.89.w,
+                          height: 175.37.h,
+                          color: AppColors.borderColor,
+                          child: const Icon(Icons.broken_image),
+                        ),
+                      ),
+                    )
+                  : Image.network(
+                      product?.image ?? "",
+                      width: 140.89.w,
+                      height: 175.37.h,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        width: 140.89.w,
+                        height: 175.37.h,
+                        color: AppColors.borderColor,
+                        child: const Icon(Icons.broken_image),
+                      ),
+                    ),
             ),
             10.verticalSpace,
             Text(
