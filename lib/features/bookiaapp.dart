@@ -35,7 +35,7 @@ class BookiaApp extends StatelessWidget {
 
   String initPage() {
     if (LocalHelper.prfes?.getString(AppConstants.UserToken) != null) {
-      return AppRoutes.HomeScreen;
+      return AppRoutes.NavBarScreen;
     } else {
       return AppRoutes.WelcomeScreen;
     }

@@ -4,6 +4,7 @@ import 'package:bookia/features/auth/presentation/ui/login_screen.dart';
 import 'package:bookia/features/auth/presentation/ui/register_screen.dart';
 import 'package:bookia/features/book_details/presentation/cubit/bookdetails_cubit.dart';
 import 'package:bookia/features/book_details/presentation/ui/book_details_screen.dart';
+import 'package:bookia/features/bottom_nav_bar/data/ui/bottom_nav_bar.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/ui/home_screen.dart';
 import 'package:bookia/features/home/presentation/ui/search_screen.dart';
@@ -14,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppRouter {
   static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.NavBarScreen:
+        return MaterialPageRoute(builder: (_) => NavBarScreen());
       case AppRoutes.LoginScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
