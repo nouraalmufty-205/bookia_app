@@ -9,6 +9,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final bool? autofocus;
+  final Function(String)? onChanged;
   const CustomTextField({
     super.key,
     required this.hintText,
@@ -16,6 +17,7 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.controller,
     this.autofocus,
+    this.onChanged,
   });
 
   @override
@@ -28,6 +30,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       autofocus: widget.autofocus ?? false,
       controller: widget.controller,
       validator: widget.validator,
