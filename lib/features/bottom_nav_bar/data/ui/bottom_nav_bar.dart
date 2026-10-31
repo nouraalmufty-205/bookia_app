@@ -1,4 +1,6 @@
 import 'package:bookia/core/theme/appcolors.dart';
+import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:bookia/features/cart/presentation/ui/cart_screen.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/ui/home_screen.dart';
 import 'package:bookia/features/profile/presentation/cubit/profile_cubit.dart';
@@ -26,10 +28,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
       create: (context) => HomeCubit()..GetBestSellerBooks(),
       child: HomeScreen(),
     ),
-    BlocProvider(
-      create: (context) => HomeCubit()..GetBestSellerBooks(),
-      child: HomeScreen(),
-    ),
+    BlocProvider(create: (context) => CartCubit(), child: CartScreen()),
 
     BlocProvider(
       create: (context) => ProfileCubit()..GetProfileData(),

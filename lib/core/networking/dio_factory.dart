@@ -14,8 +14,8 @@ class DioFactory {
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",
-          "authurization":
-              "Baerer${LocalHelper.prfes?.get(AppConstants.UserToken)}",
+          "Authorization":
+              "Bearer ${LocalHelper.prfes?.get(AppConstants.UserToken)}",
         },
       ),
     );

@@ -8,4 +8,6 @@ class ApiEndpoints {
   static const String profile = "profile";
   static const String addtocart = "add-to-cart";
   static const String cart = "cart";
+  static const String updateCart = "update-cart";
+  static const String removeFromCart = "remove-from-cart";
 }

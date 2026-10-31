@@ -12,60 +12,94 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: [
-            HomeAppBar(),
-            25.verticalSpace,
-            BlocBuilder<HomeCubit, HomeState>(
-              builder: (context, state) {
-                if (state is GetBestSellerLoading) {
-                  return Expanded(
-                    child: Skeletonizer(
-                      enabled: true,
+    return BlocListener<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is AddToCartLoading) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (state is AddToCartSuccess) {
+          Navigator.pop(context);
+          showDialog(
+            context: context,
+            builder: (context) => const AlertDialog(
+              title: Text("Product Added To Cart"),
+            ),
+          );
+        } else if (state is AddToCartError) {
+          Navigator.pop(context);
+          showDialog(
+            context: context,
+            builder: (context) => const AlertDialog(
+              title: Text("Failed to add product to cart"),
+            ),
+          );
+        }
+      },
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const HomeAppBar(),
+              25.verticalSpace,
+              BlocBuilder<HomeCubit, HomeState>(
+                buildWhen: (previous, current) =>
+                    current is GetBestSellerError ||
+                    current is GetBestSellerLoading ||
+                    current is GetBestSellerSuccess,
+                builder: (context, state) {
+                  if (state is GetBestSellerLoading) {
+                    return Expanded(
+                      child: Skeletonizer(
+                        enabled: true,
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 14.h,
+                            crossAxisSpacing: 18.w,
+                            childAspectRatio: .52,
+                          ),
+                          itemBuilder: (context, index) => BookItem(
+                            product: Products(
+                              name: "name",
+                              price: "223",
+                              image:
+                                  "https://upload.wikimedia.org/wikipedia/commons/9/9e/Network_card.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+                            ),
+                          ),
+                          itemCount: 8,
+                        ),
+                      ),
+                    );
+                  } else if (state is GetBestSellerSuccess) {
+                    return Expanded(
                       child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 14.h,
                           crossAxisSpacing: 18.w,
                           childAspectRatio: .52,
                         ),
-                        itemBuilder: (context, index) => BookItem(
-                          product: Products(
-                            name: "name",
-                            price: "223",
-                            image:
-                                "https://upload.wikimedia.org/wikipedia/commons/9/9e/Network_card.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
-                          ),
-                        ),
-                        itemCount: 8,
+                        itemBuilder: (context, index) =>
+                            BookItem(product: state.products?[index]),
+                        itemCount: state.products?.length,
                       ),
-                    ),
-                  );
-                } else if (state is GetBestSellerSuccess) {
-                  return Expanded(
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 14.h,
-                        crossAxisSpacing: 18.w,
-                        childAspectRatio: .52,
-                      ),
-                      itemBuilder: (context, index) =>
-                          BookItem(product: state.products?[index]),
-                      itemCount: state.products?.length,
-                    ),
-                  );
-                } else {
-                  return Text("Error");
-                }
-              },
-            ),
-          ],
+                    );
+                  } else {
+                    return const Text("Error");
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
