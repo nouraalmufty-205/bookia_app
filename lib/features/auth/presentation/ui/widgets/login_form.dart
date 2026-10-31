@@ -41,7 +41,7 @@ class _LoginFormState extends State<LoginForm> {
           );
         } else if (state is LoginSuccessState) {
           Navigator.pop(context);
-          Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen);
+          Navigator.pushReplacementNamed(context, AppRoutes.NavBarScreen);
         } else if (state is LoginErrorState) {
           Navigator.pop(context);
           showDialog(

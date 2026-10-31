@@ -12,44 +12,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
 
-            children: [
-              HomeAppBar(),
-              25.verticalSpace,
-              BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
-                  if (state is GetBestSellerLoading) {
-                    return Expanded(
-                      child: Skeletonizer(
-                        enabled: true,
-                        child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 14.h,
-                                crossAxisSpacing: 18.w,
-                                childAspectRatio: .52,
-                              ),
-                          itemBuilder: (context, index) => BookItem(
-                            product: Products(
-                              name: "name",
-                              price: "223",
-                              image:
-                                  "https://upload.wikimedia.org/wikipedia/commons/9/9e/Network_card.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
-                            ),
-                          ),
-                          itemCount: 8,
-                        ),
-                      ),
-                    );
-                  } else if (state is GetBestSellerSuccess) {
-                    return Expanded(
+          children: [
+            HomeAppBar(),
+            25.verticalSpace,
+            BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                if (state is GetBestSellerLoading) {
+                  return Expanded(
+                    child: Skeletonizer(
+                      enabled: true,
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -57,18 +34,38 @@ class HomeScreen extends StatelessWidget {
                           crossAxisSpacing: 18.w,
                           childAspectRatio: .52,
                         ),
-                        itemBuilder: (context, index) =>
-                            BookItem(product: state.products?[index]),
-                        itemCount: state.products?.length,
+                        itemBuilder: (context, index) => BookItem(
+                          product: Products(
+                            name: "name",
+                            price: "223",
+                            image:
+                                "https://upload.wikimedia.org/wikipedia/commons/9/9e/Network_card.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+                          ),
+                        ),
+                        itemCount: 8,
                       ),
-                    );
-                  } else {
-                    return Text("Error");
-                  }
-                },
-              ),
-            ],
-          ),
+                    ),
+                  );
+                } else if (state is GetBestSellerSuccess) {
+                  return Expanded(
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 14.h,
+                        crossAxisSpacing: 18.w,
+                        childAspectRatio: .52,
+                      ),
+                      itemBuilder: (context, index) =>
+                          BookItem(product: state.products?[index]),
+                      itemCount: state.products?.length,
+                    ),
+                  );
+                } else {
+                  return Text("Error");
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

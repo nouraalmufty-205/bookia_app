@@ -1,4 +1,3 @@
-import 'package:bookia/core/routes/app_router.dart';
 import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/theme/app_textstyles.dart';
 import 'package:bookia/core/widgets/app_button.dart';
@@ -15,27 +14,30 @@ class WelcomeScreen extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: Image.asset('assets/images/bg.png').image,
+            image: AssetImage('assets/images/bg.png'),
           ),
         ),
         child: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.language, size: 12),
-                  onPressed: () {
-                    if (context.locale.languageCode == 'en') {
-                      context.setLocale(Locale('ar'));
-                    } else {
-                      context.setLocale(Locale('en'));
-                    }
-                  },
-                ),
-              ],
+            SafeArea(
+              bottom: false,
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.language, size: 12),
+                    onPressed: () {
+                      if (context.locale.languageCode == 'en') {
+                        context.setLocale(const Locale('ar'));
+                      } else {
+                        context.setLocale(const Locale('en'));
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
 
             135.verticalSpace,
@@ -45,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
               "order_your_book_now".tr(),
               style: AppTextstyles.font30Regular.copyWith(fontSize: 20.sp),
             ),
-            Spacer(),
+            const Spacer(),
             AppButton(
               title: "login".tr(),
               onTap: () {
