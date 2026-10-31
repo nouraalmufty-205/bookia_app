@@ -1,6 +1,7 @@
 import 'package:bookia/core/theme/appcolors.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/ui/home_screen.dart';
+import 'package:bookia/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:bookia/features/profile/presentation/ui/profile_screen.dart';
 import 'package:bookia/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,10 @@ class _NavBarScreenState extends State<NavBarScreen> {
       child: HomeScreen(),
     ),
 
-    ProfileScreen(),
+    BlocProvider(
+      create: (context) => ProfileCubit()..GetProfileData(),
+      child: ProfileScreen(),
+    ),
   ];
   @override
   Widget build(BuildContext context) {

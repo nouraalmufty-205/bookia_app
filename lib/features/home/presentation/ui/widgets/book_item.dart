@@ -2,7 +2,10 @@ import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/theme/app_textstyles.dart';
 import 'package:bookia/core/theme/appcolors.dart';
 import 'package:bookia/features/home/data/models/book_model.dart';
+import 'package:bookia/features/home/data/repo/home_repo.dart';
+import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BookItem extends StatelessWidget {
@@ -81,7 +84,9 @@ class BookItem extends StatelessWidget {
                 ),
                 30.horizontalSpace,
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<HomeCubit>().AddToCart(product?.id ?? 0);
+                  },
                   icon: Icon(Icons.shopping_cart),
                   padding: EdgeInsets.zero,
                 ),

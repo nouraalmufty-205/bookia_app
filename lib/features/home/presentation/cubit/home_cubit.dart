@@ -26,4 +26,14 @@ class HomeCubit extends Cubit<HomeState> {
       emit(SearchError());
     }
   }
+
+  AddToCart(int productId) async {
+    emit(AddToCartLoading());
+    final response = await HomeRepo.addToCart(productId);
+    if (response) {
+      emit(AddToCartSuccess());
+    } else {
+      emit(AddToCartError());
+    }
+  }
 }

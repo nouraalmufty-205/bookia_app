@@ -1,3 +1,4 @@
+import 'package:bookia/core/networking/dio_factory.dart';
 import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_validator.dart';
 import 'package:bookia/core/widgets/app_button.dart';
@@ -41,6 +42,7 @@ class _LoginFormState extends State<LoginForm> {
           );
         } else if (state is LoginSuccessState) {
           Navigator.pop(context);
+          DioFactory.init();
           Navigator.pushReplacementNamed(context, AppRoutes.NavBarScreen);
         } else if (state is LoginErrorState) {
           Navigator.pop(context);

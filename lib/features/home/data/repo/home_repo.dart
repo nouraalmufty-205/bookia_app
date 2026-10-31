@@ -1,5 +1,6 @@
 import 'package:bookia/core/networking/api_endpoints.dart';
 import 'package:bookia/core/networking/dio_factory.dart';
+import 'package:bookia/core/utils/app_constants.dart';
 import 'package:bookia/features/home/data/models/book_model.dart';
 import 'package:dio/dio.dart';
 
@@ -32,6 +33,22 @@ class HomeRepo {
       }
     } catch (e) {
       return null;
+    }
+  }
+
+  static Future<bool> addToCart(int productId) async {
+    try {
+      final response = await DioFactory.dio?.post(
+        ApiEndpoints.addtocart,
+        data: {"product_id": productId},
+      );
+      if (response?.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 }
