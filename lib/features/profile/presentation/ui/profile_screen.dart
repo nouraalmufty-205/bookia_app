@@ -1,4 +1,4 @@
-import 'package:bookia/core/widgets/back_arrow.dart';
+import 'package:bookia/features/profile/presentation/widgets/profile_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -6,6 +6,11 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [BackArrow()]);
+    return const SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [ProfileAppBar()],
+      ),
+    );
   }
 }

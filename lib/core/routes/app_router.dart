@@ -1,5 +1,4 @@
 import 'package:bookia/core/routes/app_routes.dart';
-import 'package:bookia/features/auth/presentation/cubit/auth_cubit_cubit.dart';
 import 'package:bookia/features/auth/presentation/ui/login_screen.dart';
 import 'package:bookia/features/auth/presentation/ui/register_screen.dart';
 import 'package:bookia/features/book_details/presentation/cubit/bookdetails_cubit.dart';
@@ -16,18 +15,13 @@ class AppRouter {
   static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.NavBarScreen:
-        return MaterialPageRoute(builder: (_) => NavBarScreen());
+        return MaterialPageRoute(builder: (_) => const NavBarScreen());
       case AppRoutes.LoginScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => AuthCubit(),
-            child: LoginScreen(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case AppRoutes.WelcomeScreen:
-        return MaterialPageRoute(builder: (_) => WelcomeScreen());
+        return MaterialPageRoute(builder: (_) => const WelcomeScreen());
       case AppRoutes.RegisterScreen:
-        return MaterialPageRoute(builder: (_) => RegisterScreen());
+        return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case AppRoutes.HomeScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
