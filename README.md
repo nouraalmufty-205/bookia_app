@@ -28,6 +28,11 @@ Details Screen
 
 <img width="355" height="795" alt="image" src="https://github.com/user-attachments/assets/553da5b3-29d0-41d2-8677-4a4e4e77691e" />
 
+Cart Screen
+
+<img width="354" height="755" alt="image" src="https://github.com/user-attachments/assets/effdfa5f-3196-4b36-a794-520c7d70ccf5" />
+
+
 
 
 
